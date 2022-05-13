@@ -64,27 +64,31 @@ public class MathSolutionControllerTest {
                 .andExpect(content().json(outputJson));
     }
 
-    @Test
-    public void shouldReturn422ErrorForInvalidAddRequest() throws Exception {
 
-        Map<String, String> problem = new HashMap<>();
-        problem.put("operand1", "2");
-        problem.put("operand2", "not a number");
+    @Test
+    public void shouldSubtractInteger() throws Exception {
+        MathSolution problem = new MathSolution();
+        problem.setOperand1(810);
+        problem.setOperand2(760);
+        problem.setOperation("subtract");
 
         String inputJson = mapper.writeValueAsString(problem);
 
-        mockMvc.perform(
-                        post("/add")
-                                .content(inputJson)
-                                .contentType(MediaType.APPLICATION_JSON)
+        MathSolution output = new MathSolution();
+        output.setOperand1(810);
+        output.setOperand2(760);
+        output.setOperation("subtract");
+        output.setAnswer(50);
+        String outputJson = mapper.writeValueAsString(output);
+
+        mockMvc.perform(post("/subtract")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+
                 )
                 .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
-    }
-
-
-    @Test
-    public void shouldSubtractInteger() {
+                .andExpect(status().isCreated())
+                .andExpect(content().json(outputJson));
     }
 
     @Test
@@ -143,14 +147,32 @@ public class MathSolutionControllerTest {
     @Test
     public void shouldReturn422StatusMultiplicationInvalid() throws  Exception {
 
-        Map<String, String> input = new HashMap<>();
-        input.put("operand1", "2");
-        input.put("operand2", "not a number");
+        Map<String, String> problem = new HashMap<>();
+        problem.put("operand1", "2");
+        problem.put("operand2", "not a number");
 
-        String inputJson = mapper.writeValueAsString(input);
+        String inputJson = mapper.writeValueAsString(problem);
 
         mockMvc.perform(
                         post("/multiply")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void shouldReturn422ErrorForInvalidAddRequest() throws Exception {
+
+        Map<String, String> problem = new HashMap<>();
+        problem.put("operand1", "2");
+        problem.put("operand2", "not a number");
+
+        String inputJson = mapper.writeValueAsString(problem);
+
+        mockMvc.perform(
+                        post("/add")
                                 .content(inputJson)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
