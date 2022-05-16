@@ -1,12 +1,13 @@
 package com.company.M2ChallengeBarnesLloyd.models;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class MathSolution {
 
-    //    @NotNull(message = "You must supply a number")
+    @NotNull(message = "You must supply a number")
     private Integer operand1;
-    //    @NotNull(message = "You must supply a number")
+    @NotNull(message = "You must supply a number")
     private Integer operand2;
     private String operation;
     private Integer answer;

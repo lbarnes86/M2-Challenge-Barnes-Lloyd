@@ -44,16 +44,24 @@ public class MathSolutionController {
 
         return product;
     }
-
     @PostMapping("/divide")
     @ResponseStatus(value = HttpStatus.CREATED)
     public MathSolution divide(@RequestBody @Valid MathSolution quotient) {
-        quotient.setAnswer(quotient.getOperand1() / quotient.getOperand2());
-        quotient.setOperation("divide");
-        if (quotient.getOperand2() == 0) {
+//        quotient.setAnswer(quotient.getOperand1() / quotient.getOperand2());
+//        quotient.setOperation("divide");
+
+        if (quotient.getOperand1() == null || quotient.getOperand2() == null) {
+            throw new IllegalArgumentException("Please enter a valid number");
+        }
+        else if (quotient.getOperand2() == 0) {
             throw new IllegalArgumentException("Denominator cannot be zero");
+
+        } else {
+            quotient.setAnswer(quotient.getOperand1() / quotient.getOperand2());
+            quotient.setOperation("divide");
         }
-            return quotient;
-        }
+
+        return quotient;
+    }
 
 }
