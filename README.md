@@ -8,7 +8,7 @@ correspoonding month name, and complete math problems and retrieve solutions usi
 
 ## Usage
 
-Donwload or fork repor and run app on http://localhost:8080/
+Donwload or fork repo and run app on http://localhost:8080/ Please see the Swagger API documentation for more info: https://github.com/lbarnes86/M2-Challenge-Barnes-Lloyd/blob/main/openapi.yaml
 
 ## User Story
 
